@@ -1,0 +1,26 @@
+  public class UnitTest1
+    {
+        [TestMethod]
+        public void CreatePerson()
+        {
+            PersonService personService = new PersonService();
+            Console.WriteLine("Before: " + personService.getPeople().Count);
+            Person person = new Person() { };
+            person.Name = "Abdulla";
+            person.ID = 49;
+            personService.Create(person);
+            Console.WriteLine("After: " + personService.getPeople().Count);
+            Assert.IsTrue(personService.getPeople().Exists(x => x.Name == "Abdulla"));
+        }
+
+        [TestMethod]
+        public void DeletePerson()
+        {
+            PersonService personService = new PersonService();
+            Console.WriteLine("Before: " + personService.getPeople().Count);
+            personService.deletePersonByID(49);
+            Console.WriteLine("After: " + personService.getPeople().Count);
+            Assert.IsFalse(personService.getPeople().Exists(x => x.Name == "Abdulla"));
+        }
+    }
+}
